@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function Card({ children }: Props) {
+function Card({ children }: Props): React.JSX.Element {
   return (
     <div className="p-3 bg-white rounded-lg flex flex-col w-72 mb-3">
       {children}

@@ -5,7 +5,7 @@ type Props = {
   isSolid: boolean;
 };
 
-const CardLabel = (props: Props) => {
+const CardLabel = (props: Props): React.JSX.Element => {
   const { label, isSolid } = props;
 
   if (isSolid) {

@@ -1,10 +1,9 @@
 import React from "react";
-import "boxicons";
 
 import Card from "../Card/Card";
 import CardLabel from "../CardLabel";
 
-const CardItem = () => {
+const CardItem = (): React.JSX.Element => {
   return (
     <Card>
       <div className="flex flex-col">
