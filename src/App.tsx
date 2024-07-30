@@ -1,3 +1,5 @@
+import "boxicons";
+
 import "./App.css";
 import Main from "./screens/Main";
 
