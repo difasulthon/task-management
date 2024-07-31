@@ -1,8 +1,8 @@
 import "boxicons";
 
 import "./App.css";
-import Main from "./screens/Main";
-import New from "./screens/New";
+import Main from "./pages/Main";
+import New from "./pages/New";
 
 function App() {
   return (
