@@ -16,6 +16,7 @@ const Main = (): React.JSX.Element => {
             onChange={(e) => setKeyWord(e.target.value)}
             value={keyWord}
             type="text"
+            placeholder="Search task"
           />
         </form>
         <Button
