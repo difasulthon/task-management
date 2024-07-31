@@ -12,7 +12,7 @@ const Button = (props: Props): React.JSX.Element => {
   return (
     <button
       onClick={onClick}
-      className="flex flex-row items-center bg-custom-greenPrimary rounded-lg px-2"
+      className="flex flex-row items-center bg-custom-greenPrimary rounded-lg px-2 hover:opacity-50"
     >
       {icon}
       <p className="text-sm text-white ml-2 font-semibold">{label}</p>
