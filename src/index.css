@@ -17,6 +17,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+input {
+  outline: none;
+}
+
 /* a {
   font-weight: 500;
   color: #646cff;
