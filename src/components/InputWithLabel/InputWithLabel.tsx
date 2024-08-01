@@ -6,7 +6,7 @@ type Props = InputProps & {
 };
 
 const InputWithLabel = (props: Props) => {
-  const { label, type, onChange, placeholder, value } = props;
+  const { label, type, onChange, placeholder, value, isArea } = props;
 
   return (
     <div className="flex flex-col">
@@ -16,6 +16,7 @@ const InputWithLabel = (props: Props) => {
         onChange={onChange}
         placeholder={placeholder}
         value={value}
+        isArea={isArea}
       />
     </div>
   );
