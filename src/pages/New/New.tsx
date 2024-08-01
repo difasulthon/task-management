@@ -1,34 +1,48 @@
 import React from "react";
 
 import InputWithLabel from "../../components/InputWithLabel";
+import Button from "../../components/Button";
+import DropdownWithLabel from "../../components/DropdownWithLabel";
+
+import { listLabel, listPriority } from "./New.config";
 
 const New = (): React.JSX.Element => {
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col w-6/12">
-        <div className="flex flex-row gap-8 mb-8">
-          <InputWithLabel
-            type="text"
-            label="Title"
-            placeholder="Input title"
-            onChange={() => {}}
-            value=""
-          />
-          <InputWithLabel
-            type="text"
-            label="Label"
-            placeholder="Input label"
-            onChange={() => {}}
-            value=""
-          />
-        </div>
+      <div className="flex flex-col w-6/12 items-center">
+        <div className="h-16"></div>
         <InputWithLabel
           type="text"
-          label="Priority"
-          placeholder="Input priority"
+          label="Title"
+          placeholder="Input title"
           onChange={() => {}}
           value=""
         />
+        <div className="h-5"></div>
+        <InputWithLabel
+          isArea
+          type="text"
+          label="Description"
+          placeholder="Input description"
+          onChange={() => {}}
+          value=""
+        />
+        <div className="h-5"></div>
+        <DropdownWithLabel
+          label="Label"
+          placeholder="Select label"
+          list={listLabel}
+          onChange={(item) => console.log("item", item)}
+        />
+        <div className="h-5"></div>
+        <DropdownWithLabel
+          label="Priority"
+          placeholder="Select priority"
+          list={listPriority}
+          onChange={(item) => console.log("item", item)}
+        />
+        <div className="h-10"></div>
+        <Button label="Submit" onClick={() => {}} width="w-80" />
       </div>
     </div>
   );
