@@ -27,26 +27,28 @@ const Dropdown = (props: Props) => {
       >
         <p className="font-normal text-sm">{value.label || placeholder}</p>
         {isShowList ? (
-          <box-icon name="chevron-down"></box-icon>
-        ) : (
           <box-icon name="chevron-up"></box-icon>
+        ) : (
+          <box-icon name="chevron-down"></box-icon>
         )}
       </div>
-      {isShowList && (
-        <ul className="bg-white w-80 rounded-lg py-2 px-2 border border-black mt-1">
-          {list.map((item: ListDropDown) => (
-            <li
-              key={item.id}
-              onClick={() => clickItemHandler(item)}
-              className={`font-normal text-sm mb-1 border-b border-gray-300 pb-2 hover:opacity-50 hover:cursor-pointer
+      <div className="relative">
+        {isShowList && (
+          <ul className="absolute bg-white w-80 rounded-lg py-2 px-2 border border-black mt-1 z-10">
+            {list.map((item: ListDropDown) => (
+              <li
+                key={item.id}
+                onClick={() => clickItemHandler(item)}
+                className={`font-normal text-sm mb-1 border-b border-gray-300 pb-2 hover:opacity-50 hover:cursor-pointer
                 ${item.id === value.id ? "bg-custom-secondary" : "bg-white"}
               `}
-            >
-              {item.label}
-            </li>
-          ))}
-        </ul>
-      )}
+              >
+                {item.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 };
