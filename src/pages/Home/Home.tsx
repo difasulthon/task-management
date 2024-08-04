@@ -1,11 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
+import Constants from "../../constants";
 import StatusLabel from "../../components/StatusLabel";
 import CardItem from "../../components/CardItem";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
-const Main = (): React.JSX.Element => {
+const { ROUTES } = Constants;
+
+const onNewClicked = (navigate) => () => navigate(ROUTES.NEW_TASK);
+
+const Home = (): React.JSX.Element => {
+  const navigate = useNavigate();
   const [keyWord, setKeyWord] = React.useState<string>("");
 
   return (
@@ -20,7 +27,7 @@ const Main = (): React.JSX.Element => {
           />
         </form>
         <Button
-          onClick={() => {}}
+          onClick={onNewClicked(navigate)}
           icon={<box-icon name="plus" color="white" size="sm"></box-icon>}
           label="New Task"
         />
@@ -61,4 +68,4 @@ const Main = (): React.JSX.Element => {
   );
 };
 
-export default Main;
+export default Home;
