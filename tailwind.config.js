@@ -13,7 +13,8 @@ export default {
           greyPrimary: '#65676D',
           greySecondary: '#F1F2F4',
           redPrimary: '#FF6C65',
-          greenPrimary: '#60B158'
+          greenPrimary: '#60B158',
+          bluePrimary: '#007AFF'
         }
       }
     },
