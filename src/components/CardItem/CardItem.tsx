@@ -3,9 +3,15 @@ import React from "react";
 import Card from "../Card/Card";
 import CardLabel from "../CardLabel";
 
-const CardItem = (): React.JSX.Element => {
+type Props = {
+  onClick: void;
+};
+
+const CardItem = (props: Props): React.JSX.Element => {
+  const { onClick } = props;
+
   return (
-    <Card>
+    <Card onClick={onClick}>
       <div className="flex flex-col">
         <h3 className="text-xl text-black font-normal mb-8">
           This is a Title of the task

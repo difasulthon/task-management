@@ -11,6 +11,8 @@ const { ROUTES } = Constants;
 
 const onNewClicked = (navigate) => () => navigate(ROUTES.NEW_TASK);
 
+const onTaskItemClicked = (navigate) => () => navigate(ROUTES.TASK);
+
 const Home = (): React.JSX.Element => {
   const navigate = useNavigate();
   const [keyWord, setKeyWord] = React.useState<string>("");
@@ -36,7 +38,7 @@ const Home = (): React.JSX.Element => {
         <div className="flex flex-col">
           <StatusLabel status="TO DO" />
           <div className="p-1 mt-7 rounded-md bg-custom-secondary">
-            <CardItem />
+            <CardItem onClick={onTaskItemClicked(navigate)} />
             <CardItem />
             <CardItem />
             <CardItem />
