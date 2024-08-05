@@ -1,5 +1,6 @@
 const ROUTES = {
-  NEW_TASK: 'new-task'
+  NEW_TASK: 'new-task',
+  TASK: 'task'
 };
 
 export {
