@@ -1,3 +1,18 @@
+const listStatus = [
+  {
+    id: 1,
+    label: "TO DO",
+  },
+  {
+    id: 2,
+    label: "IN PROGRESS",
+  },
+  {
+    id: 3,
+    label: "FINISH",
+  },
+]
+
 const listLabel = [
   {
     id: 1,
@@ -29,6 +44,7 @@ const listPriority = [
 ];
 
 export {
+  listStatus,
   listLabel,
   listPriority
 }
