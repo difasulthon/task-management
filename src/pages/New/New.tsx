@@ -4,7 +4,7 @@ import InputWithLabel from "../../components/InputWithLabel";
 import Button from "../../components/Button";
 import DropdownWithLabel from "../../components/DropdownWithLabel";
 
-import { listLabel, listPriority } from "./New.config";
+import { listLabel, listPriority } from "../../configs/Options.config";
 
 const New = (): React.JSX.Element => {
   return (
