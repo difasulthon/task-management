@@ -6,10 +6,11 @@ export type Props = {
   value: string;
   placeholder: string;
   isArea: boolean;
+  required: boolean;
 };
 
 const Input = (props: Props): React.JSX.Element => {
-  const { type, onChange, value, placeholder, isArea } = props;
+  const { type, onChange, value, placeholder, isArea, required } = props;
 
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
 
@@ -33,6 +34,7 @@ const Input = (props: Props): React.JSX.Element => {
         ${isFocused ? "border-custom-primary" : "border-black"}
       `}
         placeholder={placeholder}
+        required={required}
       />
     );
   }

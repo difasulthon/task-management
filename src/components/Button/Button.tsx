@@ -1,6 +1,6 @@
-import React from "react";
+import React, { ButtonHTMLAttributes, HTMLAttributes } from "react";
 
-type Props = {
+type Props = ButtonHTMLAttributes<HTMLAttributes> & {
   icon: React.JSX.Element;
   label: string;
   onClick: void;
@@ -8,13 +8,14 @@ type Props = {
 };
 
 const Button = (props: Props): React.JSX.Element => {
-  const { icon, label, onClick, width } = props;
+  const { icon, label, onClick, width, type } = props;
 
   if (icon) {
     return (
       <button
         onClick={onClick}
         className="flex flex-row items-center bg-custom-greenPrimary rounded-lg px-2 hover:opacity-50"
+        type={type}
       >
         {icon}
         <p className="text-sm text-white ml-2 font-semibold">{label}</p>
@@ -26,6 +27,7 @@ const Button = (props: Props): React.JSX.Element => {
     <button
       onClick={onClick}
       className={`flex justify-center bg-custom-greenPrimary rounded-lg px-2 py-2 hover:opacity-50 ${width}`}
+      type={type}
     >
       <p className="text-sm text-white font-semibold">{label}</p>
     </button>
