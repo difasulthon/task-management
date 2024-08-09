@@ -44,6 +44,7 @@ const InputTitle = (props: Props) => {
       ) : (
         <h3
           onClick={() =>
+            !state.isShowInputDescription &&
             dispatch({
               type: INPUT_TITLE,
               payload: !state.isShowInputTitle,

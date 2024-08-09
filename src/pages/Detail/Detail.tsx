@@ -3,7 +3,7 @@ import React from "react";
 import {
   initialInputFlagStates,
   inputFlagReducer,
-} from "./reducers/InputFlagReducer";
+} from "./reducers/InputFlag.reducer";
 import type { ActionType, InputFlagState } from "./Detail.types";
 import InputTitle from "./components/InputTitle";
 import InputDescription from "./components/InputDescription";

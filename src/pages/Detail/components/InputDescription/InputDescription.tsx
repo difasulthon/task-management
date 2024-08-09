@@ -45,6 +45,7 @@ const InputDescription = (props: Props) => {
       ) : (
         <p
           onClick={() =>
+            !state.isShowInputTitle &&
             dispatch({
               type: INPUT_DESCRIPTION,
               payload: !state.isShowInputDescription,
