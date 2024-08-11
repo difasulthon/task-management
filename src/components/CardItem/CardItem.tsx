@@ -23,7 +23,6 @@ const CardItem = (props: Props): React.JSX.Element => {
   const backgroundColorLabel = getLabelBackgroundColor(data.label.id);
   const textColorLabel = getLabelTextColor(data.label.id);
   const borderColorPriority = getPriorityBorderColor(data.priority.id);
-  console.log("borderColorPriority", borderColorPriority);
   const textColorPriority = getPriorityTextColor(data.priority.id);
 
   return (
