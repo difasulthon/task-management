@@ -1,23 +1,29 @@
-import React, { ChangeEvent } from "react";
-
-import Constants from "../../../../constants";
+import React from "react";
 
 import type { ActionType, InputFlagState } from "../../Detail.types";
 
 import Input from "../Input";
+import {
+  handleOnChange,
+  handleOnCheckClicked,
+  handleOnClickDescription,
+  handleOnCloseClicked,
+} from "./InputDescription.handlers";
+import { getTaskById } from "../../Detail.handler";
 
 type Props = {
   state: InputFlagState;
   dispatch: (action: ActionType) => void;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  editState: InputFormState;
+  editDispatch: (action: ActionType) => void;
+  id: string;
 };
 
-const {
-  INPUT_FLAG_REDUCERS_TYPE: { INPUT_DESCRIPTION },
-} = Constants;
-
 const InputDescription = (props: Props) => {
-  const { state, dispatch, onChange } = props;
+  const { state, dispatch, value, editState, editDispatch, id } = props;
+
+  const task = getTaskById(id);
 
   return (
     <>
@@ -25,36 +31,30 @@ const InputDescription = (props: Props) => {
         <div className="mb-12">
           <Input
             isArea={true}
-            onChange={onChange}
-            value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi optio
-            dolore architecto voluptatem animi nostrum asperiores."
+            onChange={(e) => handleOnChange(e, editDispatch)}
+            value={editState.description || task.description}
             onCheckClicked={() =>
-              dispatch({
-                type: INPUT_DESCRIPTION,
-                payload: !state.isShowInputDescription,
-              })
+              handleOnCheckClicked(task.id, value, state, dispatch)
             }
             onCloseClicked={() =>
-              dispatch({
-                type: INPUT_DESCRIPTION,
-                payload: !state.isShowInputDescription,
-              })
+              handleOnCloseClicked(
+                task.description,
+                state,
+                dispatch,
+                editDispatch
+              )
             }
           />
         </div>
       ) : (
         <p
           onClick={() =>
-            !state.isShowInputTitle &&
-            dispatch({
-              type: INPUT_DESCRIPTION,
-              payload: !state.isShowInputDescription,
-            })
+            !state.isShowInputDescription &&
+            handleOnClickDescription(state, dispatch)
           }
-          className="font-normal text-base hover:cursor-pointer hover:bg-gray-100"
+          className="font-normal text-base hover:cursor-pointer w-11/12 hover:bg-gray-100"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi optio
-          dolore architecto voluptatem animi nostrum asperiores.
+          {task.description}
         </p>
       )}
     </>
