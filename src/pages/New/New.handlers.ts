@@ -17,6 +17,13 @@ const handleSelect = (item, dispatch, type) => {
   })
 };
 
+const generateTaskNumber = () => {
+  const tasks = getTasks()
+  const newId = tasks.length ? tasks[tasks.length - 1].taskNumber + 1 : 1;
+
+  return newId;
+}
+
 const handleSubmit = (e, state, navigate) => {
   e.preventDefault();
   const newTask = {
@@ -24,7 +31,8 @@ const handleSubmit = (e, state, navigate) => {
     id: crypto.randomUUID(),
     status: listStatus[0],
     createdAt: new Date(),
-    lastModified: new Date()
+    lastModified: new Date(),
+    taskNumber: `TMON-${generateTaskNumber()}`
   }
 
   const existingTasks = getTasks()
