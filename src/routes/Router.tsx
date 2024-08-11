@@ -7,6 +7,7 @@ import New from "../pages/New";
 import Home from "../pages/Home";
 import Detail from "../pages/Detail";
 import { loader as homeLoader } from "../pages/Home/Home";
+import { loader as detailLoader } from "../pages/Detail/Detail";
 
 const { ROUTES } = Constants;
 
@@ -25,8 +26,9 @@ const router = createBrowserRouter([
         element: <New />,
       },
       {
-        path: ROUTES.TASK,
+        path: `${ROUTES.TASK}/:taskId`,
         element: <Detail />,
+        loader: detailLoader satisfies LoaderFunction,
       },
     ],
   },

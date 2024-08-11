@@ -1,31 +1,63 @@
 import React from "react";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 
 import {
   initialInputFlagStates,
   inputFlagReducer,
 } from "./reducers/InputFlag.reducer";
-import type { ActionType, InputFlagState } from "./Detail.types";
+import type {
+  ActionType,
+  InputFlagState,
+  InputFormState,
+} from "./Detail.types";
 import InputTitle from "./components/InputTitle";
 import InputDescription from "./components/InputDescription";
 import DropdownStatus from "./components/DropdownStatus";
 import DropdownLabel from "./components/DropdownLabel";
 import DropdownPriority from "./components/DropdownPriority";
+import { getTaskById } from "./Detail.handler";
+import {
+  editFormReducer,
+  initialEditFormStates,
+} from "./reducers/EditForm.reducer";
+
+export async function loader({ params }: LoaderFunctionArgs) {
+  const task = getTaskById(params.taskId);
+
+  return { task };
+}
 
 const Detail = (): React.JSX.Element => {
   const [state, dispatch] = React.useReducer<{
     state: InputFlagState;
     action: ActionType;
   }>(inputFlagReducer, initialInputFlagStates);
+  const [editState, editDispatch] = React.useReducer<{
+    state: InputFormState;
+    action: ActionType;
+  }>(editFormReducer, initialEditFormStates);
+
+  const { task } = useLoaderData();
 
   return (
     <div className="flex w-12/12 justify-center">
       <div className="flex flex-row gap-3 pt-10 w-7/12">
-        <div className="flex flex-col max-w-xl">
-          <InputTitle state={state} dispatch={dispatch} onChange={() => {}} />
+        <div className="flex flex-col w-8/12">
+          <InputTitle
+            state={state}
+            editState={editState}
+            dispatch={dispatch}
+            editDispatch={editDispatch}
+            value={editState.title || task.title}
+            id={task.id}
+          />
           <InputDescription
             state={state}
+            editState={editState}
             dispatch={dispatch}
-            onChange={() => {}}
+            editDispatch={editDispatch}
+            value={editState.description || task.description}
+            id={task.id}
           />
         </div>
         <div className="flex flex-col">
