@@ -9,13 +9,14 @@ import Input from "../../components/Input";
 import { getTasks } from "../../utils/Storage";
 import type { LoaderData } from "../../types/General.types";
 
-import { getGenerateToDoList } from "./Home.handlers";
+import { getGenerateList } from "./Home.handlers";
 
 const { ROUTES } = Constants;
 
 const onNewClicked = (navigate) => () => navigate(ROUTES.NEW_TASK);
 
-const onTaskItemClicked = (navigate) => () => navigate(ROUTES.TASK);
+const onTaskItemClicked = (navigate, id) => () =>
+  navigate(`${ROUTES.TASK}/${id}`);
 
 export async function loader() {
   const tasks = (await getTasks()) as LoaderData<typeof loader>;
@@ -29,7 +30,9 @@ const Home = (): React.JSX.Element => {
 
   const [keyWord, setKeyWord] = React.useState<string>("");
 
-  const listToDo = getGenerateToDoList(tasks);
+  const listToDo = getGenerateList(tasks, 1);
+  const listInProgress = getGenerateList(tasks, 2);
+  const listFinish = getGenerateList(tasks, 3);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -56,35 +59,36 @@ const Home = (): React.JSX.Element => {
               listToDo.map((item) => (
                 <CardItem
                   key={item.id}
-                  onClick={onTaskItemClicked(navigate)}
+                  onClick={onTaskItemClicked(navigate, item.id)}
                   data={item}
                 />
               ))}
-            {/* <CardItem onClick={onTaskItemClicked(navigate)} />
-            <CardItem />
-            <CardItem />
-            <CardItem />
-            <CardItem /> */}
           </div>
         </div>
         <div className="flex flex-col">
           <StatusLabel status="IN PROGRESS" />
           <div className="p-1 mt-7 rounded-md bg-custom-secondary">
-            {/* <CardItem />
-            <CardItem />
-            <CardItem />
-            <CardItem />
-            <CardItem /> */}
+            {listInProgress &&
+              listInProgress.map((item) => (
+                <CardItem
+                  key={item.id}
+                  onClick={onTaskItemClicked(navigate)}
+                  data={item}
+                />
+              ))}
           </div>
         </div>
         <div className="flex flex-col">
           <StatusLabel status="FINISH" />
           <div className="p-1 mt-7 rounded-md bg-custom-secondary">
-            {/* <CardItem />
-            <CardItem />
-            <CardItem />
-            <CardItem />
-            <CardItem /> */}
+            {listFinish &&
+              listFinish.map((item) => (
+                <CardItem
+                  key={item.id}
+                  onClick={onTaskItemClicked(navigate)}
+                  data={item}
+                />
+              ))}
           </div>
         </div>
       </div>

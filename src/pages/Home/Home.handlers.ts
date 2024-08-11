@@ -1,9 +1,9 @@
-const getGenerateToDoList = (tasks: Array<object>) => {
-  const result = tasks.filter(item => item.status.id === 1)
+const getGenerateList = (tasks: Array<object>, filterId: number) => {
+  const result = tasks.filter(item => item.status.id === filterId)
 
   return result;
 }
 
 export {
-  getGenerateToDoList
+  getGenerateList
 }
