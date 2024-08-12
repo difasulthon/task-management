@@ -1,55 +1,47 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 
-import Constants from "../../../../constants";
 import { listPriority } from "../../../../configs/Options.config";
+import type { Task } from "../../../../types/Task.type";
+import { getPriorityTextColor } from "../../../../utils/Color";
 
+import { getTaskById } from "../../Detail.handler";
 import type { ActionType, InputFlagState } from "../../Detail.types";
 
 import DropdownOptions from "../DropdownOptions";
 
+import { handleOnClick, handleOnClickItem } from "./DropdownPriority.handlers";
+
 type Props = {
   state: InputFlagState;
   dispatch: (action: ActionType) => void;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  editState: InputFormState;
+  editDispatch: (action: ActionType) => void;
+  id: string;
 };
 
-const {
-  INPUT_FLAG_REDUCERS_TYPE: { INPUT_PRIORITY },
-} = Constants;
-
 const DropdownPriority = (props: Props) => {
-  const { state, dispatch, onChange } = props;
+  const { state, dispatch, editState, editDispatch, id } = props;
 
-  const [value, setValue] = React.useState<DropDownItem>(listPriority[0]);
-
-  const clickItemHandler = (item) => {
-    setValue(item);
-    onChange(item);
-    dispatch({
-      type: INPUT_PRIORITY,
-      payload: !state.isShowDropdownPriority,
-    });
-  };
+  const task: Task = getTaskById(id);
 
   return (
     <>
       <p
-        onClick={() =>
-          dispatch({
-            type: INPUT_PRIORITY,
-            payload: !state.isShowDropdownPriority,
-          })
-        }
-        className="text-custom-redPrimary font-medium text-sm hover:cursor-pointer hover:bg-gray-100"
+        onClick={() => handleOnClick(state, dispatch)}
+        className={`font-medium text-sm hover:cursor-pointer hover:bg-gray-100 ${getPriorityTextColor(
+          task.priority.id
+        )}`}
       >
-        {value.label}
+        {task.priority.label}
       </p>
       <div className="relative">
         {state.isShowDropdownPriority && (
           <DropdownOptions
             list={listPriority}
-            value={value}
-            onClick={(item) => clickItemHandler(item)}
+            value={editState.priority || task.priority}
+            onClick={(item) =>
+              handleOnClickItem(item, state, dispatch, editDispatch, task.id)
+            }
           />
         )}
       </div>
