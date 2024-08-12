@@ -1,3 +1,4 @@
+import type { SelectableItem, Task } from "../../types/Task.type";
 import { getTasks, setTasks } from "../../utils/Storage"
 
 const getTaskById = (id: string) => {
@@ -8,9 +9,10 @@ const getTaskById = (id: string) => {
 
 const handleEditTitle = (id: string, value: string) => {
   const tasks = getTasks()
-  tasks.map(item => {
+  tasks.map((item: Task) => {
     if(item.id === id) {
       item.title = value
+      item.lastModified = new Date()
     }
   })
 
@@ -19,9 +21,46 @@ const handleEditTitle = (id: string, value: string) => {
 
 const handleEditDescription = (id: string, value: string) => {
   const tasks = getTasks()
-  tasks.map(item => {
+  tasks.map((item: Task) => {
     if(item.id === id) {
       item.description = value
+      item.lastModified = new Date()
+    }
+  })
+
+  setTasks(tasks);
+}
+
+const handleEditStatus = (id: string, value: SelectableItem) => {
+  const tasks = getTasks()
+  tasks.map((item: Task) => {
+    if(item.id === id) {
+      item.status = value
+      item.lastModified = new Date()
+    }
+  })
+
+  setTasks(tasks);
+}
+
+const handleEditLabel = (id: string, value: SelectableItem) => {
+  const tasks = getTasks()
+  tasks.map((item: Task) => {
+    if(item.id === id) {
+      item.label = value
+      item.lastModified = new Date()
+    }
+  })
+
+  setTasks(tasks);
+}
+
+const handleEditPriority = (id: string, value: SelectableItem) => {
+  const tasks = getTasks()
+  tasks.map((item: Task) => {
+    if(item.id === id) {
+      item.priority = value
+      item.lastModified = new Date()
     }
   })
 
@@ -31,5 +70,8 @@ const handleEditDescription = (id: string, value: string) => {
 export {
   getTaskById,
   handleEditTitle,
-  handleEditDescription
+  handleEditDescription,
+  handleEditStatus,
+  handleEditLabel,
+  handleEditPriority
 }

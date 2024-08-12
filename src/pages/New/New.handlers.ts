@@ -32,7 +32,7 @@ const handleSubmit = (e, state, navigate) => {
     status: listStatus[0],
     createdAt: new Date(),
     lastModified: new Date(),
-    taskNumber: `TMON-${generateTaskNumber()}`
+    taskNumber: generateTaskNumber()
   }
 
   const existingTasks = getTasks()
