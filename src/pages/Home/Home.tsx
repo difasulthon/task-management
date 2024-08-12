@@ -1,49 +1,79 @@
 import React from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import {
+  LoaderFunctionArgs,
+  useLoaderData,
+  useNavigate,
+} from "react-router-dom";
 
-import Constants from "../../constants";
 import StatusLabel from "../../components/StatusLabel";
 import CardItem from "../../components/CardItem";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import useDebounce from "../../hooks/useDebounce";
 import { getTasks } from "../../utils/Storage";
 import type { LoaderData } from "../../types/General.types";
 import type { Task } from "../../types/Task.type";
 
-import { getGenerateList } from "./Home.handlers";
+import {
+  generateSearchTask,
+  getGenerateList,
+  handleOnClickRightIcon,
+  onNewClicked,
+  onTaskItemClicked,
+} from "./Home.handlers";
 
-const { ROUTES } = Constants;
+export async function loader({ request }): LoaderFunctionArgs {
+  const url = new URL(request.url);
+  const searchQuery = url.searchParams.get("search") || "";
 
-const onNewClicked = (navigate) => () => navigate(ROUTES.NEW_TASK);
-
-const onTaskItemClicked = (navigate, id) => () =>
-  navigate(`${ROUTES.TASK}/${id}`);
-
-export async function loader() {
   const tasks = (await getTasks()) as LoaderData<typeof loader>;
+  const filteredTasks = searchQuery ? generateSearchTask(searchQuery) : tasks;
 
-  return { tasks };
+  return { tasks: filteredTasks, searchQuery };
 }
 
 const Home = (): React.JSX.Element => {
   const navigate = useNavigate();
-  const { tasks } = useLoaderData();
+  const { tasks, searchQuery } = useLoaderData();
 
-  const [keyWord, setKeyWord] = React.useState<string>("");
+  const [keyWord, setKeyWord] = React.useState<string>(searchQuery);
+  const keyWordDebounce = useDebounce(keyWord, 1000);
 
-  const listToDo = getGenerateList(tasks, 1);
-  const listInProgress = getGenerateList(tasks, 2);
-  const listFinish = getGenerateList(tasks, 3);
+  React.useEffect(() => {
+    const params = new URLSearchParams();
+
+    if (keyWordDebounce) {
+      params.set("search", keyWordDebounce);
+    } else {
+      params.delete("search");
+    }
+
+    navigate(`?${params.toString()}`, { replace: true });
+  }, [keyWordDebounce, navigate]);
+
+  const taskList = React.useMemo(() => {
+    if (!keyWordDebounce) {
+      return getTasks() || tasks;
+    } else {
+      return generateSearchTask(keyWordDebounce);
+    }
+  }, [keyWordDebounce]);
+
+  const listToDo = getGenerateList(taskList, 1);
+  const listInProgress = getGenerateList(taskList, 2);
+  const listFinish = getGenerateList(taskList, 3);
 
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex px-5 w-8/12 justify-between mt-10">
-        <form method="post" onSubmit={() => {}}>
+        <form method="get" onSubmit={() => {}} role="search">
           <Input
             onChange={(e) => setKeyWord(e.target.value)}
             value={keyWord}
             type="text"
             placeholder="Search task"
+            rightIcon={<box-icon name="x"></box-icon>}
+            onClickRightIcon={() => handleOnClickRightIcon(setKeyWord)}
           />
         </form>
         <Button
