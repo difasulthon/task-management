@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { getTasks } from "../../utils/Storage";
 import type { LoaderData } from "../../types/General.types";
+import type { Task } from "../../types/Task.type";
 
 import { getGenerateList } from "./Home.handlers";
 
@@ -54,9 +55,9 @@ const Home = (): React.JSX.Element => {
       <div className="flex justify-center gap-5 mt-14">
         <div className="flex flex-col">
           <StatusLabel status="TO DO" />
-          <div className="p-1 mt-7 rounded-md bg-custom-secondary">
+          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-full">
             {listToDo &&
-              listToDo.map((item) => (
+              listToDo.map((item: Task) => (
                 <CardItem
                   key={item.id}
                   onClick={onTaskItemClicked(navigate, item.id)}
@@ -67,12 +68,12 @@ const Home = (): React.JSX.Element => {
         </div>
         <div className="flex flex-col">
           <StatusLabel status="IN PROGRESS" />
-          <div className="p-1 mt-7 rounded-md bg-custom-secondary">
+          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-full">
             {listInProgress &&
-              listInProgress.map((item) => (
+              listInProgress.map((item: Task) => (
                 <CardItem
                   key={item.id}
-                  onClick={onTaskItemClicked(navigate)}
+                  onClick={onTaskItemClicked(navigate, item.id)}
                   data={item}
                 />
               ))}
@@ -80,12 +81,12 @@ const Home = (): React.JSX.Element => {
         </div>
         <div className="flex flex-col">
           <StatusLabel status="FINISH" />
-          <div className="p-1 mt-7 rounded-md bg-custom-secondary">
+          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-full">
             {listFinish &&
-              listFinish.map((item) => (
+              listFinish.map((item: Task) => (
                 <CardItem
                   key={item.id}
-                  onClick={onTaskItemClicked(navigate)}
+                  onClick={onTaskItemClicked(navigate, item.id)}
                   data={item}
                 />
               ))}

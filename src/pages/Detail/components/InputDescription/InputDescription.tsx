@@ -1,5 +1,7 @@
 import React from "react";
 
+import type { Task } from "../../../../types/Task.type";
+
 import type { ActionType, InputFlagState } from "../../Detail.types";
 
 import Input from "../Input";
@@ -23,10 +25,11 @@ type Props = {
 const InputDescription = (props: Props) => {
   const { state, dispatch, value, editState, editDispatch, id } = props;
 
-  const task = getTaskById(id);
+  const task: Task = getTaskById(id);
 
   return (
     <>
+      <p className="text-sm font-bold mb-2">Description</p>
       {state.isShowInputDescription ? (
         <div className="mb-12">
           <Input
@@ -52,7 +55,7 @@ const InputDescription = (props: Props) => {
             !state.isShowInputDescription &&
             handleOnClickDescription(state, dispatch)
           }
-          className="font-normal text-base hover:cursor-pointer w-11/12 hover:bg-gray-100"
+          className="font-normal text-justify text-base hover:cursor-pointer w-11/12 hover:bg-gray-100"
         >
           {task.description}
         </p>

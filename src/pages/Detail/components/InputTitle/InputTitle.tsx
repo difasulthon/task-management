@@ -1,5 +1,7 @@
 import React from "react";
 
+import type { Task } from "../../../../types/Task.type";
+
 import { getTaskById } from "../../Detail.handler";
 import type {
   InputFlagState,
@@ -28,7 +30,7 @@ type Props = {
 const InputTitle = (props: Props) => {
   const { state, dispatch, value, editState, editDispatch, id } = props;
 
-  const task = getTaskById(id);
+  const task: Task = getTaskById(id);
 
   return (
     <>
