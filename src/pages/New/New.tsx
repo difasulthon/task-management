@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import InputWithLabel from "../../components/InputWithLabel";
@@ -14,6 +14,7 @@ import {
 } from "./reducers/InputForm.reducer";
 import { handleInput, handleSelect, handleSubmit } from "./New.handlers";
 import type { ActionType, InputFormState } from "./New.types";
+import Snackbar from "../../components/Snackbar";
 
 const {
   INPUT_FORM_REDUCERS_TYPE: { TITLE, DESCRIPTION, LABEL, PRIORITY },
@@ -25,10 +26,23 @@ const New = (): React.JSX.Element => {
     action: ActionType;
   }>(inputFormReducer, initialInputFormStates);
 
+  const [error, setError] = useState<boolean>(false);
+  const [isShowError, setIsShowError] = useState<boolean>(false);
+  const errorStates = { error, setError, setIsShowError };
+
+  useEffect(() => {
+    if (isShowError) {
+      setTimeout(() => {
+        setIsShowError(false);
+      }, 3000);
+    }
+  }, [error]);
+
   const navigate = useNavigate();
 
   return (
     <div className="flex justify-center">
+      {error && isShowError && <Snackbar message={error} />}
       <div className="flex flex-col w-6/12 items-center">
         <div className="h-16"></div>
         <form action="" method="get">
@@ -67,7 +81,7 @@ const New = (): React.JSX.Element => {
           <Button
             label="Submit"
             type="submit"
-            onClick={(e) => handleSubmit(e, state, navigate)}
+            onClick={(e) => handleSubmit(e, state, navigate, errorStates)}
             width="w-80"
           />
         </form>
