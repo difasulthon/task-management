@@ -24,7 +24,7 @@ const CardLabel = (props: Props): React.JSX.Element => {
       <div
         className={`flex rounded-md px-2 py-1 bg-custom-greySecondary ${backgroundSolidColor}`}
       >
-        <p className={`text-xs font-medium ${textSolidColor}`}>{label}</p>
+        <p className={`text-xs font-semibold ${textSolidColor}`}>{label}</p>
       </div>
     );
   }

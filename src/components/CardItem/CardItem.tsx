@@ -1,15 +1,14 @@
 import React from "react";
 
 import type { Task } from "../../types/Task.type";
+import { getLabelTextColor, getPriorityTextColor } from "../../utils/Color";
 
 import Card from "../Card/Card";
 import CardLabel from "../CardLabel";
 
 import {
   getLabelBackgroundColor,
-  getLabelTextColor,
   getPriorityBorderColor,
-  getPriorityTextColor,
 } from "./CardItem.handlers";
 
 type Props = {
@@ -28,7 +27,7 @@ const CardItem = (props: Props): React.JSX.Element => {
   return (
     <Card onClick={onClick}>
       <div className="flex flex-col">
-        <h3 className="text-xl text-black font-normal mb-8">{data.title}</h3>
+        <h3 className="text-lg text-black font-normal mb-8">{data.title}</h3>
         <div className="flex justify-between">
           <CardLabel
             label={data.label.label}
@@ -43,8 +42,13 @@ const CardItem = (props: Props): React.JSX.Element => {
           />
         </div>
         <div className="flex mt-6">
-          <box-icon name="bookmarks" type="solid" color="#60B158"></box-icon>
-          <p className="text-sm font-semibold ml-1">{data.taskNumber}</p>
+          <box-icon
+            name="bookmarks"
+            type="solid"
+            color="#60B158"
+            size="xs"
+          ></box-icon>
+          <p className="text-sm font-semibold ml-1">TMON-{data.taskNumber}</p>
         </div>
       </div>
     </Card>
