@@ -45,7 +45,7 @@ const editFormReducer = (state: typeof initialEditFormStates, action: ActionType
     case LABEL: {
       return {
         ...state,
-        status: action.payload,
+        label: action.payload,
       };
     }
     case PRIORITY: {

@@ -1,55 +1,47 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 
-import Constants from "../../../../constants";
 import { listLabel } from "../../../../configs/Options.config";
+import type { Task } from "../../../../types/Task.type";
+import { getLabelTextColor } from "../../../../utils/Color";
 
+import { getTaskById } from "../../Detail.handler";
 import type { ActionType, InputFlagState } from "../../Detail.types";
 
 import DropdownOptions from "../DropdownOptions";
 
+import { handleOnClick, handleOnClickItem } from "./DropdownLabel.handlers";
+
 type Props = {
   state: InputFlagState;
   dispatch: (action: ActionType) => void;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  editState: InputFormState;
+  editDispatch: (action: ActionType) => void;
+  id: string;
 };
 
-const {
-  INPUT_FLAG_REDUCERS_TYPE: { INPUT_LABEL },
-} = Constants;
-
 const DropdownLabel = (props: Props) => {
-  const { state, dispatch, onChange } = props;
+  const { state, dispatch, editState, editDispatch, id } = props;
 
-  const [value, setValue] = React.useState<DropDownItem>(listLabel[0]);
-
-  const clickItemHandler = (item) => {
-    setValue(item);
-    onChange(item);
-    dispatch({
-      type: INPUT_LABEL,
-      payload: !state.isShowDropdownLabel,
-    });
-  };
+  const task: Task = getTaskById(id);
 
   return (
     <>
       <p
-        onClick={() =>
-          dispatch({
-            type: INPUT_LABEL,
-            payload: !state.isShowDropdownLabel,
-          })
-        }
-        className="text-custom-bluePrimary font-medium text-sm hover:cursor-pointer hover:bg-gray-100"
+        onClick={() => handleOnClick(state, dispatch)}
+        className={`font-medium text-sm hover:cursor-pointer hover:bg-gray-100 ${getLabelTextColor(
+          task.label.id
+        )}`}
       >
-        {value.label}
+        {task.label.label}
       </p>
       <div className="relative">
         {state.isShowDropdownLabel && (
           <DropdownOptions
             list={listLabel}
-            value={value}
-            onClick={(item) => clickItemHandler(item)}
+            value={editState.label || task.label}
+            onClick={(item) =>
+              handleOnClickItem(item, state, dispatch, editDispatch, task.id)
+            }
           />
         )}
       </div>
