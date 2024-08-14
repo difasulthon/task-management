@@ -2,7 +2,9 @@ import React, { ChangeEvent, HTMLInputTypeAttribute } from "react";
 
 export type Props = {
   type: HTMLInputTypeAttribute;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   value: string;
   placeholder: string;
   isArea: boolean;
