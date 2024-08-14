@@ -65,7 +65,7 @@ const Home = (): React.JSX.Element => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex px-5 w-8/12 justify-between mt-10">
+      <div className="flex flex-row w-8/12 justify-between mt-10">
         <form method="get" onSubmit={() => {}} role="search">
           <Input
             onChange={(e) => setKeyWord(e.target.value)}
@@ -82,10 +82,10 @@ const Home = (): React.JSX.Element => {
           label="New Task"
         />
       </div>
-      <div className="flex justify-center gap-5 mt-14">
-        <div className="flex flex-col">
+      <div className="flex justify-center gap-5 mt-14 w-8/12">
+        <div className="flex flex-col w-1/3">
           <StatusLabel status="TO DO" />
-          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-full">
+          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-[calc(100vh-200px)] overflow-y-auto">
             {listToDo &&
               listToDo.map((item: Task) => (
                 <CardItem
@@ -96,9 +96,9 @@ const Home = (): React.JSX.Element => {
               ))}
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-1/3">
           <StatusLabel status="IN PROGRESS" />
-          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-full">
+          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-[calc(100vh-200px)] overflow-y-auto">
             {listInProgress &&
               listInProgress.map((item: Task) => (
                 <CardItem
@@ -109,9 +109,9 @@ const Home = (): React.JSX.Element => {
               ))}
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-1/3">
           <StatusLabel status="FINISH" />
-          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-full">
+          <div className="p-1 mt-7 rounded-md bg-custom-greySecondary h-[calc(100vh-200px)] overflow-y-auto">
             {listFinish &&
               listFinish.map((item: Task) => (
                 <CardItem

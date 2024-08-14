@@ -52,8 +52,7 @@ const InputDescription = (props: Props) => {
       ) : (
         <p
           onClick={() =>
-            !state.isShowInputDescription &&
-            handleOnClickDescription(state, dispatch)
+            !state.isShowInputTitle && handleOnClickDescription(state, dispatch)
           }
           className="font-normal text-justify text-base hover:cursor-pointer w-11/12 hover:bg-gray-100"
         >
