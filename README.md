@@ -10,4 +10,4 @@ This repository for Task Management web app. Task Management is an application t
 
 This is an example of user interface this website.
 
-<!-- ![Welcome Page](sample-ui.png) -->
+![Home Page](/src/assets/images/sample-ui.png)
