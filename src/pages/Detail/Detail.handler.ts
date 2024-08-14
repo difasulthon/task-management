@@ -67,11 +67,25 @@ const handleEditPriority = (id: string, value: SelectableItem) => {
   setTasks(tasks);
 }
 
+const handleDeleteTask = (id: string) => {
+  const tasks: Array<Task> = getTasks()
+  const newTasks = tasks.filter((item: Task) => item.id !== id)
+
+  setTasks(newTasks)
+}
+
+const handleDeleteClick = (id: string, navigate) => {
+  handleDeleteTask(id)
+  
+  navigate('/')
+}
+
 export {
   getTaskById,
   handleEditTitle,
   handleEditDescription,
   handleEditStatus,
   handleEditLabel,
-  handleEditPriority
+  handleEditPriority,
+  handleDeleteClick
 }
