@@ -34,7 +34,11 @@ const DropdownStatus = (props: Props) => {
         )}`}
       >
         <p className="text-white text-base">{task.status.label}</p>
-        <box-icon name="chevron-down" color="white" size="sm"></box-icon>
+        {state.isShowDropdownStatus ? (
+          <box-icon name="chevron-up" color="white" size="sm"></box-icon>
+        ) : (
+          <box-icon name="chevron-down" color="white" size="sm"></box-icon>
+        )}
       </div>
       <div className="relative">
         {state.isShowDropdownStatus && (
