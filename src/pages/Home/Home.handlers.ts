@@ -2,7 +2,7 @@ import Constants from "../../constants";
 import type { Task } from "../../types/Task.type";
 import { getTasks } from "../../utils/Storage";
 
-const {ROUTES} = Constants
+const {ROUTES, TASK_NUMBER_NAME} = Constants
 
 const getGenerateList = (tasks: Array<object>, filterId: number) => {
   const result = tasks
@@ -21,7 +21,7 @@ const generateSearchTask = (value: string) => {
     const status = item.status.label.toLowerCase();
     const label = item.label.label.toLowerCase();
     const priority = item.priority.label.toLowerCase();
-    const taskNumber = "tmon-" + item.taskNumber.toString();
+    const taskNumber = TASK_NUMBER_NAME.toLowerCase() + "-" + item.taskNumber.toString();
 
     return (
       title.includes(keyWord) ||

@@ -2,6 +2,7 @@ import React from "react";
 
 import type { Task } from "../../types/Task.type";
 import { getLabelTextColor, getPriorityTextColor } from "../../utils/Color";
+import Constants from "../../constants";
 
 import Card from "../Card/Card";
 import CardLabel from "../CardLabel";
@@ -15,6 +16,8 @@ type Props = {
   onClick: void;
   data: Task;
 };
+
+const { TASK_NUMBER_NAME } = Constants;
 
 const CardItem = (props: Props): React.JSX.Element => {
   const { onClick, data } = props;
@@ -48,7 +51,9 @@ const CardItem = (props: Props): React.JSX.Element => {
             color="#60B158"
             size="xs"
           ></box-icon>
-          <p className="text-sm font-semibold ml-1">TMON-{data.taskNumber}</p>
+          <p className="text-sm font-semibold ml-1">
+            {TASK_NUMBER_NAME}-{data.taskNumber}
+          </p>
         </div>
       </div>
     </Card>
